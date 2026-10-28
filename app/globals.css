@@ -1,0 +1,400 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* ------------------------------------------------------------------ */
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  /* Warm healthcare pairing (hero redesign) */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-humanist: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Warm healthcare palette (hero redesign): calm, human, never "tech" */
+@theme {
+  /* Cream — warm porcelain surfaces */
+  --color-cream-50: #fffdf9;
+  --color-cream-100: #fbf7f0;
+  --color-cream-200: #f4ede2;
+  --color-cream-300: #e9dfcf;
+  --color-cream-400: #d9cbb4;
+
+  /* Care — deep evergreen teal: trust, clinical calm */
+  --color-care-50: #eef6f3;
+  --color-care-100: #d5eae3;
+  --color-care-200: #add5c8;
+  --color-care-300: #7dbba9;
+  --color-care-400: #4e9c88;
+  --color-care-500: #2f7f6c;
+  --color-care-600: #216656;
+  --color-care-700: #1b5146;
+  --color-care-800: #17423a;
+  --color-care-900: #133630;
+  --color-care-950: #0b211d;
+
+  /* Blush — warmth, heartbeat, sweetness */
+  --color-blush-50: #fff5f1;
+  --color-blush-100: #ffe8df;
+  --color-blush-200: #fcd0c0;
+  --color-blush-300: #f7b29b;
+  --color-blush-400: #ef8e70;
+  --color-blush-500: #e26e4f;
+  --color-blush-600: #c9553a;
+
+  /* Lilac — calm, night-time care */
+  --color-lilac-50: #f6f4fc;
+  --color-lilac-100: #ece8f7;
+  --color-lilac-200: #d9d1f0;
+  --color-lilac-300: #bcafe3;
+  --color-lilac-500: #7d6bc2;
+  --color-lilac-700: #4f3f8f;
+
+  /* Honey — morning light */
+  --color-honey-100: #fcefd2;
+  --color-honey-200: #f9e0a8;
+  --color-honey-300: #f5cf7e;
+  --color-honey-400: #efb94f;
+
+  --shadow-petal: 0 1px 2px rgb(19 54 48 / 0.04), 0 18px 40px -18px rgb(19 54 48 / 0.18);
+  --shadow-float: 0 2px 6px rgb(19 54 48 / 0.05), 0 30px 60px -24px rgb(19 54 48 / 0.28);
+}
+
+@theme {
+  /* Ink — deep clinical navy, evolved from the AETOS #001530 brand navy */
+  --color-ink-950: #040c1b;
+  --color-ink-900: #071630;
+  --color-ink-800: #0b2244;
+  --color-ink-700: #143158;
+  --color-ink-600: #2a4670;
+  --color-ink-500: #4a5f80;
+  --color-ink-400: #74839b;
+  --color-ink-300: #a3afc0;
+  --color-ink-200: #cdd5e1;
+  --color-ink-100: #e6ebf2;
+  --color-ink-50: #f3f6fa;
+
+  /* Brand — AETOS azure, the "eye" of the logo */
+  --color-brand-50: #eef5ff;
+  --color-brand-100: #d9e8ff;
+  --color-brand-200: #b9d5ff;
+  --color-brand-300: #89b8ff;
+  --color-brand-400: #5596ff;
+  --color-brand-500: #2b78ff;
+  --color-brand-600: #1660f0;
+  --color-brand-700: #124cc8;
+  --color-brand-800: #153f9e;
+  --color-brand-900: #17377c;
+
+  /* Vital — healthy readings, "live", success */
+  --color-vital-50: #ebfdf6;
+  --color-vital-100: #cefae8;
+  --color-vital-200: #a1f2d6;
+  --color-vital-300: #64e4bf;
+  --color-vital-400: #2bcfa4;
+  --color-vital-500: #0fb58c;
+  --color-vital-600: #079272;
+  --color-vital-700: #08755d;
+
+  /* Pulse — abnormal readings, alerts, heartbeat */
+  --color-pulse-50: #fff3f0;
+  --color-pulse-100: #ffe1da;
+  --color-pulse-300: #ffa592;
+  --color-pulse-400: #ff7a62;
+  --color-pulse-500: #f9573c;
+  --color-pulse-600: #e23d22;
+
+  /* Surfaces */
+  --color-canvas: #f6f8fc;
+  --color-line: #e3e9f2;
+
+  --radius-5xl: 2.5rem;
+
+  --shadow-soft: 0 1px 2px rgb(7 22 48 / 0.04), 0 8px 24px -10px rgb(7 22 48 / 0.1);
+  --shadow-lift: 0 2px 4px rgb(7 22 48 / 0.04), 0 28px 56px -20px rgb(7 22 48 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(43 120 255 / 0.2), 0 14px 40px -10px rgb(43 120 255 / 0.55);
+  --shadow-glow-vital: 0 0 0 1px rgb(43 207 164 / 0.25), 0 14px 40px -10px rgb(43 207 164 / 0.5);
+
+  --animate-marquee: marquee 48s linear infinite;
+  --animate-ecg: ecg-draw 3.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-delayed: float 8s ease-in-out -4s infinite;
+  --animate-ping-slow: ping-slow 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-spin-slow: spin 60s linear infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /* Draw, hold, then erase from the start: a seamless monitor sweep */
+  @keyframes ecg-draw {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    45%,
+    60% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -1;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes ping-slow {
+    75%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+  @keyframes aurora {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    100% {
+      transform: translate3d(4%, -6%, 0) scale(1.12);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    scroll-padding-top: 6.5rem;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Lock page scroll behind the full-screen mobile menu (it only renders below lg) */
+  @media (width < 64rem) {
+    html:has(#mobile-menu:popover-open),
+    html:has(#mobile-menu[open]) {
+      overflow: hidden;
+    }
+  }
+
+  /* Page-wide pause for decorative loops (WCAG 2.2.2). Scoped to animate-*
+     classes so scroll-driven reveal/header animations are never frozen. */
+  html:has(#motion-pause:checked) [class*="animate-"] {
+    animation-play-state: paused !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+
+/* Page-width container: 1280px max with responsive gutters */
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Serif italic accent word inside display headings */
+@utility accent-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: 1.08em;
+  line-height: 1;
+}
+
+@utility text-gradient-brand {
+  /* Darker stops keep large accent text above 3:1 on white and canvas */
+  background-image: linear-gradient(100deg, var(--color-brand-600) 10%, var(--color-vital-600) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-light {
+  background-image: linear-gradient(100deg, var(--color-brand-300) 0%, var(--color-vital-300) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Dot / line grids for technical backdrops */
+@utility bg-dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgb(7 22 48 / 0.1) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+@utility bg-dot-grid-dark {
+  background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.09) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+@utility bg-line-grid {
+  background-image:
+    linear-gradient(to right, rgb(7 22 48 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(7 22 48 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-line-grid-dark {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Soft masks for fading decorative layers */
+@utility mask-fade-y {
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@utility mask-fade-b {
+  mask-image: linear-gradient(to bottom, black 55%, transparent);
+}
+
+@utility mask-spotlight {
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+}
+
+/* Glass surfaces */
+@utility glass {
+  background-color: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.7);
+}
+
+@utility glass-dark {
+  background-color: rgb(11 34 68 / 0.55);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgb(255 255 255 / 0.09);
+}
+
+/* Subtle film-grain texture (inline SVG noise) */
+@utility bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Scroll-driven reveal: progressive enhancement, content is always visible without support */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      /* Fixed scroll distance so tall cards resolve as quickly as short ones */
+      animation-range: entry 0% entry 240px;
+    }
+  }
+}
+
+/* Floating header elevates as the page scrolls (progressive enhancement) */
+@utility header-elevate {
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: header-elevate linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 160px;
+    }
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes header-elevate {
+  from {
+    background-color: rgb(255 253 249 / 0.55);
+    box-shadow: 0 0 0 0 rgb(19 54 48 / 0);
+  }
+  to {
+    background-color: rgb(255 253 249 / 0.92);
+    box-shadow: 0 18px 44px -20px rgb(19 54 48 / 0.28);
+  }
+}
+
+/* Honour reduced-motion for every decorative loop */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
